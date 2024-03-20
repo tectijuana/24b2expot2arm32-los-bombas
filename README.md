@@ -74,6 +74,9 @@ Quiñonez Rocha Luis Arturo
 
 	<p align=left>
 
+![image](https://github.com/tectijuana/24b2expot2arm32-los-bombas/assets/158366686/6499377b-48ce-49e1-9074-f0284c8bec5a)
+
+		
 Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
 programacion c++, tomados del libro "Problemas para resolver con computadora" 
 1ra edicion (1985), por el autor Donald D. Spencer. 
