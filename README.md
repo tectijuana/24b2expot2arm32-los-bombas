@@ -56,10 +56,15 @@ Unidad:
 1
 
 Título del trabajo:
-Ejercicios ......
+Exposicion Tema 4
 
 Estudiante:
-.......
+
+Rosales Gómez Valeria
+Vara Espinoza Ulises Andres 
+Vera Cortez Oscar Bernardino
+Gonzalez Vazquez Melanie Estefania
+Quiñonez Rocha Luis Arturo
 
 	</p>
 
