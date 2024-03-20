@@ -74,9 +74,6 @@ Quiñonez Rocha Luis Arturo
 
 	<p align=left>
 
-![image](https://github.com/tectijuana/24b2expot2arm32-los-bombas/assets/158366686/63c71e51-6d9a-43b1-9bce-19754461f225)
-
-
 		
 Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
 programacion c++, tomados del libro "Problemas para resolver con computadora" 
