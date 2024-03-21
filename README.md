@@ -481,7 +481,58 @@ add r1, r1, # 1
 b bucle
 salir :
 ```
+# Programa ejemplo 
 
+## Este programa encuentra el máximo común divisor (MCD) de dos números.
+```c
+#include <stdio.h>
+
+// Función para calcular el MCD usando el algoritmo de Euclides
+int MCD(int num1, int num2) {
+    while (num2 != 0) { // Mientras num2 no sea cero
+        int temp = num2; // Almacenamos en el valor de num2 en una variable temporal
+        num2 = num1 % num2; // Actualiza el num2 con el residuo de la división de num1 entre num2
+        num1 = temp; // Restauramos el valor original de num2 en num1
+    }
+    return num1; // Devuelvo el valor final de num1, que es el MCD
+}
+
+int main() {
+    int num1 = 30; // Declaramos e inicializamos num1 con el valor 30
+    int num2 = 18; // Hacemos lo mismo con num2 con el valor 18
+    
+    // Calculamos el MCD de num1 y num2 llamando a la función llamada MCD
+    int result = MCD(num1, num2);
+    
+    // Imprimimos el resultado en la pantalla
+    printf("El MCD de %d y %d es %d\n", num1, num2, result);
+    
+    return 0; // Indica que el programa se ha ejecutado correctamente
+}
+
+```
+
+## Hacer compilable y depurable usando GDB en un entorno como Raspberry Pi OS en ARM32 bits.
+
+Se guarda el código en un archivo con extensión .c en nuetro caso MCD.c
+
+Compilamos el programa con el siguente comando 
+```
+gcc -o gcd MCD.c
+```
+
+Ejecutamos con el siguente codigo 
+```
+./gcd
+```
+
+Usamos GDB para depurar el programa
+```
+gdb ./gcd
+```
+
+ Con estos comandos te permitirán compilar, ejecutar y depurar el programa MCD.c utilizando GCC y GDB.
+ 
 <!-- Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
 programacion c++, tomados del libro "Problemas para resolver con computadora" 
 1ra edicion (1985), por el autor Donald D. Spencer. 
