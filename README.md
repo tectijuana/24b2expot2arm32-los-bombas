@@ -333,6 +333,76 @@ r1. En cada iteración se comprueba si el índice es igual a la longitud del
 vector. En caso positivo, se salta al final del bucle y en caso negativo,
 se realizan las operaciones indicadas en el bucle.
 
+# Saltos incondicionales y condicionales
+En este apartado se describen las instrucciones de salto disponibles
+en el ensamblador Thumb de ARM. En primer lugar se verá qué son los
+saltos incondicionales y a continuación, los saltos condicionales.
+
+## Saltos incondicionales
+Se denominan saltos incondicionales a aquéllos que se realizan siempre, que no dependen de que se cumpla una determinada condición. La
+instrucción de salto incondicional es «b etiqueta», donde «etiqueta»
+referencia la línea del programa a la que se quiere saltar. Al tratarse de
+una instrucción de salto incondicional, cada vez que se ejecuta la instrucción «b etiqueta», el programa saltará a la instrucción etiquetada
+con «etiqueta», independientemente de qué valor tenga el registro CCR.
+El siguiente programa muestra un ejemplo de salto incondicional.
+```asm
+1 .text
+2 main: mov r0, #5
+3 mov r1, #10
+4 mov r2, #100
+5 mov r3, #0
+6 b salto
+7 add r3, r1, r0
+8 salto: add r3, r3, r2
+9 stop: wfi
+```
+
+## Saltos condicionales
+Las instrucciones de salto condicional tiene la forma «bXX etiqueta»,
+donde «XX» se sustituye por un nemotécnico que indica el tipo de condición que se debe cumplir para realizar el salto y «etiqueta» referencia
+a la línea del programa a la que se quiere saltar. Las instrucciones de
+salto condicional comprueban ciertos indicadores del registro CCR para
+decidir si se debe saltar o no. Por ejemplo, la instrucción «beq etiqueta»
+(branch if equal) comprueba si el indicador Z está activo. Si está activo,
+entonces salta a la instrucción etiquetada con «etiqueta». Si no lo está, el programa continúa con la siguiente instrucción. De forma similar,
+«bne etiqueta» (branch if not equal) saltará a la instrucción etiquetada
+con «etiqueta» si el indicador Z no está activo, si esta activo, no saltará.
+
+El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
+
+### Instrucciones de salto condicional
+Instrucción 				Condición de salto
+
+«beq» (branch if equal) 		Iguales (Z)
+«bne» (branch if not equal) 		No iguales (z)
+«bcs» (branch if carry set) 		Mayor o igual sin signo (C)
+«bcc» (branch if carry clear) 		Menor sin signo (c)
+«bmi» (branch if minus) 		Negativo (N)
+«bpl» (branch if plus) 			Positivo o cero (n)
+«bvs» (branch if overflow set) 		Desbordamiento (V)
+«bvc» (branch if overflow clear) 	No hay desbordamiento (v)
+«bhi» (branch if higher) 		Mayor sin signo (Cz)
+«bls» (branch if lower of same) 	Menor o igual sin signo (c o Z)
+«bge» (branch if greater or equal) 	Mayor o igual (NV o nv)
+«blt» (branch if less than) 		Menor que (Nv o nV)
+«bgt» (branch if greater than) 		Mayor que (z y (NV o nv))
+«ble» (branch if less than or equal) 	Menor o igual (Nv o nV o Z)
+
+El siguiente ejemplo muestra un programa en el que se utiliza la
+instrucción «beq» para saltar en función del resultado de la operación
+anterior.
+```asm
+.text
+main: mov r0, #5
+mov r1, #10
+mov r2, #5
+mov r3, #0
+cmp r0, r2
+beq salto
+add r3, r0, r1
+salto: add r3, r3, r1
+stop: wfi
+```
 		
 <!-- Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
 programacion c++, tomados del libro "Problemas para resolver con computadora" 
