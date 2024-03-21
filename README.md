@@ -216,6 +216,12 @@ referencia la línea del programa a la que se quiere saltar. Al tratarse de
 una instrucción de salto incondicional, cada vez que se ejecuta la instrucción «b etiqueta», el programa saltará a la instrucción etiquetada
 con «etiqueta», independientemente de qué valor tenga el registro CCR.
 
+#### Sintaxis
+```
+JMP destino
+```
+Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
+
 # Instrucciones de salto
 ```
 JMP
@@ -249,12 +255,6 @@ decidir si se debe saltar o no. Por ejemplo, la instrucción «beq etiqueta»
 entonces salta a la instrucción etiquetada con «etiqueta». Si no lo está, el programa continúa con la siguiente instrucción. De forma similar,
 «bne etiqueta» (branch if not equal) saltará a la instrucción etiquetada
 con «etiqueta» si el indicador Z no está activo, si esta activo, no saltará.
-
-#### Sintaxis
-```
-JMP destino
-```
-Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
 
 #### Sintaxis
 ```
