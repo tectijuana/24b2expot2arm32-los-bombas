@@ -239,12 +239,6 @@ JP (JPE)
 JS
 ```
 
-#### Sintaxis
-```
-JMP destino
-```
-Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
-
 ## Saltos condicionales
 Las instrucciones de salto condicional tiene la forma «bXX etiqueta»,
 donde «XX» se sustituye por un nemotécnico que indica el tipo de condición que se debe cumplir para realizar el salto y «etiqueta» referencia
@@ -255,6 +249,12 @@ decidir si se debe saltar o no. Por ejemplo, la instrucción «beq etiqueta»
 entonces salta a la instrucción etiquetada con «etiqueta». Si no lo está, el programa continúa con la siguiente instrucción. De forma similar,
 «bne etiqueta» (branch if not equal) saltará a la instrucción etiquetada
 con «etiqueta» si el indicador Z no está activo, si esta activo, no saltará.
+
+#### Sintaxis
+```
+JMP destino
+```
+Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
 
 #### Sintaxis
 ```
