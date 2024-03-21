@@ -381,6 +381,50 @@ entonces salta a la instrucción etiquetada con «etiqueta». Si no lo está, el
 «bne etiqueta» (branch if not equal) saltará a la instrucción etiquetada
 con «etiqueta» si el indicador Z no está activo, si esta activo, no saltará.
 
+#### Sintaxis
+```
+JAE etiqueta
+```
+Salta si está arriba o si es igual o salta si no está abajo.
+El salto se efectua si CF esta desactivada.
+
+#### Sintaxis
+```
+JB etiqueta
+```
+Salta si está abajo o salta si no está arriba o si no es igual.
+Se efectúa el salto si CF esta activada.
+
+#### Sintaxis
+```
+JBE etiqueta
+```
+Salta si está abajo o si es igual o salta si no está arriba.
+El salto se efectúa si CF está activado o si ZF está activado (que cualquiera sea igual a 1).
+
+#### Sintaxis
+```
+JE etiqueta
+```
+Salta si es igual o salta si es cero.
+El salto se realiza si ZF está activada.
+
+#### Sintaxis
+```
+JNE etiqueta
+```
+Salta si no es igual o salta si no es cero.
+El salto se efectua si ZF está desactivada.
+
+#### Sintaxis
+```
+JG etiqueta
+```
+Salta si es más grande o salta si no es menor o igual.
+El salto ocurre si ZF = 0 u OF = SF.
+
+El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
+
 El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
 
 ### Instrucciones de salto condicional
