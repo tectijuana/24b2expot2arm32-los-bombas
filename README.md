@@ -156,19 +156,21 @@ X: .word 1
 Y: .word 1
 Z: .word 0
 
-.text
-main: ldr r0, =X
-ldr r0, [r0] @ r0 <- [X]
-ldr r1, =Y
-ldr r1, [r1] @ r1 <- [Y]
+    .text
+main:
+    ldr r0, =X
+    ldr r0, [r0] @ r0 <- [X]
+    ldr r1, =Y
+    ldr r1, [r1] @ r1 <- [Y]
 
-cmp r0, r1
-bne finsi
-add r2, r0, r1 @-
-ldr r3, =Z @ [Z] <- [X] + [Y]
-str r2, [r3] @-
+    cmp r0, r1
+    bne finsi
+    add r2, r0, r1 @-
+    ldr r3, =Z @ [Z] <- [X] + [Y]
+    str r2, [r3] @-
 
-finsi: wfi
+finsi:
+    b .
 ```
 La idea fundamental para implementar la instrucción «if x==y:» ha consistido en utilizar una instrucción
 de salto condicional que salte si no se cumple dicha condición, «bne». De esta forma, si los dos valores 
@@ -199,22 +201,26 @@ Y: .word 1
 Z: .word 0
 
 .text
-main: ldr r0, =X
-ldr r0, [r0] @ r0 <- [X]
-ldr r1, =Y
-ldr r1, [r1] @ r1 <- [Y]
+main: 
+    ldr r0, =X
+    ldr r0, [r0] @ r0 <- [X]
+    ldr r1, =Y
+    ldr r1, [r1] @ r1 <- [Y]
 
-cmp r0, r1
-bne else
-add r2, r0, r1 @ r2 <- [X] + [Y]
-b finsi
+    cmp r0, r1
+    bne else
+    add r2, r0, r1 @ r2 <- [X] + [Y]
+    b finsi
 
-else: add r2, r0, #5 @ r2 <- [X] + 5
+else: 
+    add r2, r0, #5 @ r2 <- [X] + 5
 
-finsi: ldr r3, =Z
-str r2, [r3] @ [Z] <- r2
+finsi: 
+    ldr r3, =Z
+    str r2, [r3] @ [Z] <- r2
 
-stop: wfi
+stop: 
+    b stop
 ```
 # Estructuras de control repetitivas
 Una vez vistas las estructuras de control condicionales, vamos a ver
@@ -250,25 +256,28 @@ E: .word 1
 LIM: .word 100
 
 .text
-main: ldr r0, =X
-ldr r0, [r0] @ r0 <- X
-ldr r1, =E
-ldr r1, [r1] @ r1 <- E
-ldr r2, =LIM
-ldr r2, [r2] @ r2 <- LIM
+main: 
+    ldr r0, =X
+    ldr r0, [r0] @ r0 <- X
+    ldr r1, =E
+    ldr r1, [r1] @ r1 <- E
+    ldr r2, =LIM
+    ldr r2, [r2] @ r2 <- LIM
 
-bucle: cmp r0, r2
-bpl finbuc
-lsl r3, r1, #1 @ r3 <- 2 * [E]
-add r0, r0, r3 @ r0 <- [X] + 2 * [E]
-add r1, r1, #1 @ r1 <- [E] + 1
-ldr r4, =X
-str r0, [r4] @ [X] <- r0
-ldr r4, =E
-str r1, [r4] @ [E] <- r1
-b bucle
+bucle: 
+    cmp r0, r2
+    bpl finbuc
+    lsl r3, r1, #1 @ r3 <- 2 * [E]
+    add r0, r0, r3 @ r0 <- [X] + 2 * [E]
+    add r1, r1, #1 @ r1 <- [E] + 1
+    ldr r4, =X
+    str r0, [r4] @ [X] <- r0
+    ldr r4, =E
+    str r1, [r4] @ [E] <- r1
+    b bucle
 
-finbuc: wfi
+finbuc: 
+    b finbuc
 ```
 ## Estructura de control repetitiva for
 En muchas ocasiones es necesario repetir un conjunto de acciones un
@@ -304,25 +313,29 @@ n: .word 5
 suma: .word 0
 
 .text
-main: ldr r0, =V @ r0 <- dirección de V
-ldr r1, =n
-ldr r1, [r1] @ r1 <- n
-ldr r2, =suma
-ldr r2, [r2] @ r2 <- suma
-mov r3, #0 @ r3 <- 0
+main: 
+    ldr r0, =V @ r0 <- dirección de V
+    ldr r1, =n
+    ldr r1, [r1] @ r1 <- n
+    ldr r2, =suma
+    ldr r2, [r2] @ r2 <- suma
+    mov r3, #0 @ r3 <- 0
 
-bucle: cmp r3, r1
-beq finbuc
-ldr r4, [r0]
-add r2, r2, r4 @ r2 <- r2 + V[i]
-add r0, r0, #4
-add r3, r3, #1
-b bucle
+bucle: 
+    cmp r3, r1
+    beq finbuc
+    ldr r4, [r0]
+    add r2, r2, r4 @ r2 <- r2 + V[i]
+    add r0, r0, #4
+    add r3, r3, #1
+    b bucle
 
-finbuc: ldr r0, =suma
-str r2, [r0] @ [suma] <- r2
+finbuc: 
+    ldr r0, =suma
+    str r2, [r0] @ [suma] <- r2
 
-stop: wfi
+stop: 
+    b stop
 ```
 Como se puede comprobar en el código anterior, el índice del bucle
 está almacenado en el registro r3 y la longitud del vector en el registro
@@ -343,15 +356,18 @@ una instrucción de salto incondicional, cada vez que se ejecuta la instrucción
 con «etiqueta», independientemente de qué valor tenga el registro CCR.
 El siguiente programa muestra un ejemplo de salto incondicional.
 ```asm
-1 .text
-2 main: mov r0, #5
-3 mov r1, #10
-4 mov r2, #100
-5 mov r3, #0
-6 b salto
-7 add r3, r1, r0
-8 salto: add r3, r3, r2
-9 stop: wfi
+.text
+main: 
+    mov r0, #5
+    mov r1, #10
+    mov r2, #100
+    mov r3, #0
+    b salto
+    add r3, r1, r0
+salto: 
+    add r3, r3, r2
+stop: 
+    b stop
 ```
 
 ## Saltos condicionales
@@ -390,15 +406,18 @@ instrucción «beq» para saltar en función del resultado de la operación
 anterior.
 ```asm
 .text
-main: mov r0, #5
-mov r1, #10
-mov r2, #5
-mov r3, #0
-cmp r0, r2
-beq salto
-add r3, r0, r1
-salto: add r3, r3, r1
-stop: wfi
+main: 
+    mov r0, #5
+    mov r1, #10
+    mov r2, #5
+    mov r3, #0
+    cmp r0, r2
+    beq salto
+    add r3, r0, r1
+salto: 
+    add r3, r3, r1
+stop: 
+    b stop
 ```
 		
 <!-- Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
