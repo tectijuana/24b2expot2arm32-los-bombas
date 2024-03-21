@@ -371,22 +371,22 @@ con «etiqueta» si el indicador Z no está activo, si esta activo, no saltará.
 El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
 
 ### Instrucciones de salto condicional
-Instrucción 				Condición de salto
-
-«beq» (branch if equal) 		Iguales (Z)
-«bne» (branch if not equal) 		No iguales (z)
-«bcs» (branch if carry set) 		Mayor o igual sin signo (C)
-«bcc» (branch if carry clear) 		Menor sin signo (c)
-«bmi» (branch if minus) 		Negativo (N)
-«bpl» (branch if plus) 			Positivo o cero (n)
-«bvs» (branch if overflow set) 		Desbordamiento (V)
-«bvc» (branch if overflow clear) 	No hay desbordamiento (v)
-«bhi» (branch if higher) 		Mayor sin signo (Cz)
-«bls» (branch if lower of same) 	Menor o igual sin signo (c o Z)
-«bge» (branch if greater or equal) 	Mayor o igual (NV o nv)
-«blt» (branch if less than) 		Menor que (Nv o nV)
-«bgt» (branch if greater than) 		Mayor que (z y (NV o nv))
-«ble» (branch if less than or equal) 	Menor o igual (Nv o nV o Z)
+| Instrucción 				| Condición de salto 		  |
+|---------------------------------------|---------------------------------|
+| «beq» (branch if equal) 		| Iguales (Z)			  |
+| «bne» (branch if not equal) 		| No iguales (z)		  |
+| «bcs» (branch if carry set) 		| Mayor o igual sin signo (C)	  |
+| «bcc» (branch if carry clear) 	| Menor sin signo (c)		  |
+| «bmi» (branch if minus) 		| Negativo (N)			  |
+| «bpl» (branch if plus) 		| Positivo o cero (n)		  |
+| «bvs» (branch if overflow set) 	| Desbordamiento (V)		  |
+| «bvc» (branch if overflow clear) 	| No hay desbordamiento (v)	  |
+| «bhi» (branch if higher) 		| Mayor sin signo (Cz)		  |
+| «bls» (branch if lower of same) 	| Menor o igual sin signo (c o Z) |
+| «bge» (branch if greater or equal) 	| Mayor o igual (NV o nv)	  |
+| «blt» (branch if less than) 		| Menor que (Nv o nV)		  |
+| «bgt» (branch if greater than) 	| Mayor que (z y (NV o nv))	  |
+| «ble» (branch if less than or equal) 	| Menor o igual (Nv o nV o Z)	  |
 
 El siguiente ejemplo muestra un programa en el que se utiliza la
 instrucción «beq» para saltar en función del resultado de la operación
