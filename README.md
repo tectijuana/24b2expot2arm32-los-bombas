@@ -73,103 +73,17 @@ Quiñonez Rocha Luis Arturo
 # Marco teórico
 Instrucciones de salto condicional e incondicional, bucles y estructuras de decisión en Assembly.
 
-# Estructuras de control condicionales
-En este apartado se describen las estructuras de control condicionales
-if-then e if-then-else.
-	
-## Estructura condicional if-then
-La estructura condicional if-then está presente en todos los lenguajes
-de programación y se usa para realizar o no un conjunto de acciones
-dependiendo de una condición. A continuación se muestra un programa
-escrito en Python3 que utiliza la estructura if-then.
-```python
-X = 1
-Y = 1
-Z = 0
-
-if (X == Y):
-Z = X + Y
-```
-El programa anterior comprueba si el valor de X es igual al valor de Y
-y en caso de que así sea, suma los dos valores, almacenando el resultado
-en Z. Si no son iguales, Z permanecerá inalterado.
-Una posible implementación del programa anterior en ensamblador ARM, sería la siguiente:
-
-```asm
-.data
-X: .word 1
-Y: .word 1
-Z: .word 0
-
-    .text
-main:
-    ldr r0, =X
-    ldr r0, [r0] @ r0 <- [X]
-    ldr r1, =Y
-    ldr r1, [r1] @ r1 <- [Y]
-
-    cmp r0, r1
-    bne finsi
-    add r2, r0, r1 @-
-    ldr r3, =Z @ [Z] <- [X] + [Y]
-    str r2, [r3] @-
-
-finsi:
-    b .
-```
-La idea fundamental para implementar la instrucción «if x==y:» ha consistido en utilizar una instrucción
-de salto condicional que salte si no se cumple dicha condición, «bne». De esta forma, si los dos valores 
-comparados son iguales, el programa continuará, ejecutando el bloque de instrucciones que deben ejecutarse 
-solo si «x==y» (una suma en este ejemplo). En caso contrario, se producirá
-el salto y dicho bloque no se ejecutará.
-
-## Estructura condicional if-then-else
-Sea el siguiente programa en Python3:
-```python
-X = 1
-Y = 1
-Z = 0
-
-if (X == Y):
-Z = X + Y
-else:
-Z = X + 5
-```
-En este caso, si se cumple la condición (¿son iguales X y Y?) se realiza
-una acción, sumar X y Y, y si no son iguales, se realiza otra acción
-diferente, sumar el número 5 a X.
-Una posible implementación del programa anterior en ensamblador ARM, sería la siguiente:
-```asm
-.data
-X: .word 1
-Y: .word 1
-Z: .word 0
-
-.text
-main: 
-    ldr r0, =X
-    ldr r0, [r0] @ r0 <- [X]
-    ldr r1, =Y
-    ldr r1, [r1] @ r1 <- [Y]
-
-    cmp r0, r1
-    bne else
-    add r2, r0, r1 @ r2 <- [X] + [Y]
-    b finsi
-
-else: 
-    add r2, r0, #5 @ r2 <- [X] + 5
-
-finsi: 
-    ldr r3, =Z
-    str r2, [r3] @ [Z] <- r2
-
-stop: 
-    b stop
-```
-# Estructuras de control repetitivas
+# Estructuras de control repetitivas(Bucles)
 Una vez vistas las estructuras de control condicionales, vamos a ver
 ahora las estructuras de control repetitivas while y for.
+
+Las estructuras for y while se pueden ejecutar un mínimo de 0 iteraciones (si
+la primera vez no se cumple la condición).
+
+Para programar en ensamblador estas estructuras se utilizan instrucciones de
+salto condicional. Previo a la instrucción de salto es necesario evaluar la condición
+del bucle, mediante instrucciones aritméticas o lógicas, con el
+fin de actualizar los flags de estado.
 
 ## Estructura de control repetitiva while
 La estructura de control repetitiva while permite ejecutar repetidamente un bloque de código mientras se siga cumpliendo una determinada
@@ -196,33 +110,34 @@ E = E + 1 mientras se cumpla que X <. LIM. Por lo tanto, la variable X irá toma
 Una posible implementación del programa anterior en ensamblador ARM sería la siguiente:
 ```asm
 .data
-X: .word 1
-E: .word 1
-LIM: .word 100
+X: .word 1      ; Se define una variable llamada X con un valor inicial de 1
+E: .word 1      ; Se define una variable llamada E con un valor inicial de 1
+LIM: .word 100  ; Se define una variable llamada LIM con un valor inicial de 100
 
 .text
 main: 
-    ldr r0, =X
-    ldr r0, [r0] @ r0 <- X
-    ldr r1, =E
-    ldr r1, [r1] @ r1 <- E
-    ldr r2, =LIM
-    ldr r2, [r2] @ r2 <- LIM
+    ldr r0, =X          ; Se carga la dirección de memoria de X en el registro r0
+    ldr r0, [r0]        ; Se carga el valor almacenado en la dirección de memoria apuntada por r0 en r0 (r0 <- X)
+    ldr r1, =E          ; Se carga la dirección de memoria de E en el registro r1
+    ldr r1, [r1]        ; Se carga el valor almacenado en la dirección de memoria apuntada por r1 en r1 (r1 <- E)
+    ldr r2, =LIM        ; Se carga la dirección de memoria de LIM en el registro r2
+    ldr r2, [r2]        ; Se carga el valor almacenado en la dirección de memoria apuntada por r2 en r2 (r2 <- LIM)
 
 bucle: 
-    cmp r0, r2
-    bpl finbuc
-    lsl r3, r1, #1 @ r3 <- 2 * [E]
-    add r0, r0, r3 @ r0 <- [X] + 2 * [E]
-    add r1, r1, #1 @ r1 <- [E] + 1
-    ldr r4, =X
-    str r0, [r4] @ [X] <- r0
-    ldr r4, =E
-    str r1, [r4] @ [E] <- r1
-    b bucle
+    cmp r0, r2          ; Compara el valor de r0 con el valor de r2
+    bpl finbuc          ; Salta a finbuc si r0 >= r2 (bpl = branch if positive or zero)
+    lsl r3, r1, #1      ; Se realiza un desplazamiento lógico a la izquierda en r1 (E) por 1 bit y se almacena en r3 (r3 <- 2 * [E])
+    add r0, r0, r3     ; Se suma r0 (X) con r3 (2 * [E]) y se almacena en r0 (r0 <- [X] + 2 * [E])
+    add r1, r1, #1     ; Se incrementa r1 (E) en 1 (r1 <- [E] + 1)
+    ldr r4, =X          ; Se carga la dirección de memoria de X en r4
+    str r0, [r4]        ; Se almacena el valor de r0 en la dirección de memoria apuntada por r4 ([X] <- r0)
+    ldr r4, =E          ; Se carga la dirección de memoria de E en r4
+    str r1, [r4]        ; Se almacena el valor de r1 en la dirección de memoria apuntada por r4 ([E] <- r1)
+    b bucle             ; Salta a bucle (vuelve al inicio del bucle)
 
 finbuc: 
-    b finbuc
+    b finbuc            ; Salta a finbuc (bucle infinito)
+
 ```
 ## Estructura de control repetitiva for
 En muchas ocasiones es necesario repetir un conjunto de acciones un
@@ -253,34 +168,35 @@ Una posible implementación del programa anterior en ensamblador
 Thumb de ARM sería la siguiente:
 ```asm
 .data
-V: .word 2, 4, 6, 8, 10
-n: .word 5
-suma: .word 0
+V: .word 2, 4, 6, 8, 10  ; Se define un arreglo llamado V con los valores 2, 4, 6, 8, 10
+n: .word 5                 ; Se define una variable n con el valor 5
+suma: .word 0              ; Se define una variable suma con valor inicial 0
 
 .text
 main: 
-    ldr r0, =V @ r0 <- dirección de V
-    ldr r1, =n
-    ldr r1, [r1] @ r1 <- n
-    ldr r2, =suma
-    ldr r2, [r2] @ r2 <- suma
-    mov r3, #0 @ r3 <- 0
+    ldr r0, =V              ; Se carga la dirección de memoria de V en el registro r0
+    ldr r1, =n              ; Se carga la dirección de memoria de n en el registro r1
+    ldr r1, [r1]            ; Se carga el valor almacenado en la dirección de memoria apuntada por r1 en r1 (r1 <- n)
+    ldr r2, =suma           ; Se carga la dirección de memoria de suma en el registro r2
+    ldr r2, [r2]            ; Se carga el valor almacenado en la dirección de memoria apuntada por r2 en r2 (r2 <- suma)
+    mov r3, #0              ; Se inicializa r3 con el valor 0 (r3 <- 0)
 
 bucle: 
-    cmp r3, r1
-    beq finbuc
-    ldr r4, [r0]
-    add r2, r2, r4 @ r2 <- r2 + V[i]
-    add r0, r0, #4
-    add r3, r3, #1
-    b bucle
+    cmp r3, r1              ; Compara r3 con r1 (n)
+    beq finbuc              ; Salta a finbuc si r3 es igual a r1 (n) (beq = branch if equal)
+    ldr r4, [r0]            ; Carga el valor almacenado en la dirección de memoria apuntada por r0 en r4 (r4 <- V[i])
+    add r2, r2, r4          ; Suma r4 (V[i]) con r2 (suma) y almacena el resultado en r2 (r2 <- r2 + V[i])
+    add r0, r0, #4          ; Aumenta la dirección de memoria almacenada en r0 en 4 bytes (pasa al siguiente elemento de V)
+    add r3, r3, #1          ; Incrementa r3 en 1 (avanza al siguiente elemento de V)
+    b bucle                 ; Salta a bucle (vuelve al inicio del bucle)
 
 finbuc: 
-    ldr r0, =suma
-    str r2, [r0] @ [suma] <- r2
+    ldr r0, =suma           ; Se carga la dirección de memoria de suma en r0
+    str r2, [r0]            ; Se almacena el valor de r2 en la dirección de memoria apuntada por r0 ([suma] <- r2)
 
 stop: 
-    b stop
+    b stop                   @ Salta a stop (bucle infinito)
+
 ```
 Como se puede comprobar en el código anterior, el índice del bucle
 está almacenado en el registro r3 y la longitud del vector en el registro
@@ -420,67 +336,6 @@ El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
 | «bgt» (branch if greater than) 	| Mayor que (z y (NV o nv))	  |
 | «ble» (branch if less than or equal) 	| Menor o igual (Nv o nV o Z)	  |
 
-El siguiente ejemplo muestra un programa en el que se utiliza la
-instrucción «beq» para saltar en función del resultado de la operación
-anterior.
-```asm
-.text
-main: 
-    mov r0, #5
-    mov r1, #10
-    mov r2, #5
-    mov r3, #0
-    cmp r0, r2
-    beq salto
-    add r3, r0, r1
-salto: 
-    add r3, r3, r1
-stop: 
-    b stop
-```
-
-# Bucles 
-## Estructuras de control de alto nivel
-En este punto veremos cómo se traducen a ensamblador las estructuras de control
-de alto nivel que definen un bucle (for, while, . . . ).
-
-Las estructuras for y while se pueden ejecutar un mínimo de 0 iteraciones (si
-la primera vez no se cumple la condición). La traducción de las estructuras for y
-while se puede ver en los listados 2.1 y 2.2.
-
-Para programar en ensamblador estas estructuras se utilizan instrucciones de
-salto condicional. Previo a la instrucción de salto es necesario evaluar la condición
-del bucle, mediante instrucciones aritméticas o lógicas, con el
-fin de actualizar los flags de estado.
-
-Listado 2.1: Estructura del for y while en C
-```c
-int vi , vf , i ;
-for ( i= vi ; i <= vf ; i ++ ){
-/* Cuerpo del bucle */
-}
-i= vi ;
-while ( i <= vf ){
-/* Cuerpo del bucle */
-i ++;
-}
-```
-
-Listado 2.2: Traducción de las estructuras for y while. Hemos supuesto que el valor
-inicial está en la variable vi y el valor final en la variable vf y se ha utilizado el
-registro r1 como índice de las iteraciones i.
-```asm
-ldr r1, = vi
-ldr r1, [ r1 ]
-ldr r2, = vf
-ldr r2, [ r2 ]
-bucle : cmp r1, r2
-bhi salir
-;Cuerpo del bucle
-add r1, r1, # 1
-b bucle
-salir :
-```
 # Programa ejemplo 
 
 ## Este programa encuentra el máximo común divisor (MCD) de dos números.
