@@ -95,38 +95,6 @@ JO
 JP (JPE)
 JS
 ```
-# Salto incondicional
-#### Sintaxis
-```
-JMP destino
-```
-Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
-
-# Saltos condicionales
-Los saltos condicionales transfieren el control del programa a la ubicación que se les dé como parámetro si al hacer una comparación se cumple la condición establecida en el salto
-
-#### Sintaxis
-```
-JAE etiqueta
-```
-Salta si está arriba o si es igual o salta si no está abajo.
-El salto se efectua si CF esta desactivada.
-
-#### Sintaxis
-```
-JB etiqueta
-```
-Salta si está abajo o salta si no está arriba o si no es igual.
-Se efectúa el salto si CF esta activada.
-
-#### Sintaxis
-```
-JBE etiqueta
-```
-Sintaxis:
-JBE etiqueta
-Salta si está abajo o si es igual o salta si no está arriba.
-El salto se efectúa si CF está activado o si ZF está activado (que cualquiera sea igual a 1).
 
 # Estructuras de control condicionales
 En este apartado se describen las estructuras de control condicionales
@@ -354,6 +322,13 @@ instrucción de salto incondicional es «b etiqueta», donde «etiqueta»
 referencia la línea del programa a la que se quiere saltar. Al tratarse de
 una instrucción de salto incondicional, cada vez que se ejecuta la instrucción «b etiqueta», el programa saltará a la instrucción etiquetada
 con «etiqueta», independientemente de qué valor tenga el registro CCR.
+
+#### Sintaxis
+```
+JMP destino
+```
+Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
+
 El siguiente programa muestra un ejemplo de salto incondicional.
 ```asm
 .text
