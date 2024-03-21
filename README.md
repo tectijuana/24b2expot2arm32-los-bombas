@@ -181,13 +181,13 @@ de control repetitiva while.
 2 E = 1
 3 LIM = 100
 4
-5 while (X<LIM):
+5 while (X<.LIM):
 6 X = X + 2 * E
 7 E = E + 1
 8 print(X)
 
 El programa anterior realizará las operaciones X = X + 2 · E y
-E = E + 1 mientras se cumpla que X < LIM. Por lo tanto, la variable X irá tomando los siguientes valores con cada iteración del bucle:
+E = E + 1 mientras se cumpla que X <. LIM. Por lo tanto, la variable X irá tomando los siguientes valores con cada iteración del bucle:
 3, 7, 13, 21, 31, 43, 57, 73, 91, 111.
 Una posible implementación del programa anterior en ensamblador
 Thumb de ARM sería la siguiente:
