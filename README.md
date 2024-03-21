@@ -476,9 +476,7 @@ ldr r2, = vf
 ldr r2, [ r2 ]
 bucle : cmp r1, r2
 bhi salir
-/* Cuerpo
-del
-bucle */
+;Cuerpo del bucle
 add r1, r1, # 1
 b bucle
 salir :
