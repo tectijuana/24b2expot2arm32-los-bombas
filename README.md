@@ -245,22 +245,6 @@ JMP destino
 ```
 Esta instrucción se utiliza para desviar el flujo de un programa sin tomar en cuenta las condiciones actuales de las banderas ni de los datos.
 
-El siguiente programa muestra un ejemplo de salto incondicional.
-```asm
-.text
-main: 
-    mov r0, #5
-    mov r1, #10
-    mov r2, #100
-    mov r3, #0
-    b salto
-    add r3, r1, r0
-salto: 
-    add r3, r3, r2
-stop: 
-    b stop
-```
-
 ## Saltos condicionales
 Las instrucciones de salto condicional tiene la forma «bXX etiqueta»,
 donde «XX» se sustituye por un nemotécnico que indica el tipo de condición que se debe cumplir para realizar el salto y «etiqueta» referencia
@@ -313,8 +297,6 @@ JG etiqueta
 ```
 Salta si es más grande o salta si no es menor o igual.
 El salto ocurre si ZF = 0 u OF = SF.
-
-El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
 
 El siguiente Cuadro muestra las distintas instrucciones de salto condicional.
 
