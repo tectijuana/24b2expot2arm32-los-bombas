@@ -148,8 +148,7 @@ Z = X + Y
 El programa anterior comprueba si el valor de X es igual al valor de Y
 y en caso de que así sea, suma los dos valores, almacenando el resultado
 en Z. Si no son iguales, Z permanecerá inalterado.
-Una posible implementación del programa anterior en ensamblador
-Thumb de ARM, sería la siguiente:
+Una posible implementación del programa anterior en ensamblador ARM, sería la siguiente:
 
 ```asm
 .data
@@ -192,8 +191,7 @@ Z = X + 5
 En este caso, si se cumple la condición (¿son iguales X y Y?) se realiza
 una acción, sumar X y Y, y si no son iguales, se realiza otra acción
 diferente, sumar el número 5 a X.
-Una posible implementación del programa anterior en ensamblador
-Thumb de ARM, sería la siguiente:
+Una posible implementación del programa anterior en ensamblador ARM, sería la siguiente:
 ```asm
 .data
 X: .word 1
@@ -244,8 +242,7 @@ print(X)
 El programa anterior realizará las operaciones X = X + 2 · E y
 E = E + 1 mientras se cumpla que X <. LIM. Por lo tanto, la variable X irá tomando los siguientes valores con cada iteración del bucle:
 3, 7, 13, 21, 31, 43, 57, 73, 91, 111.
-Una posible implementación del programa anterior en ensamblador
-Thumb de ARM sería la siguiente:
+Una posible implementación del programa anterior en ensamblador ARM sería la siguiente:
 ```asm
 .data
 X: .word 1
