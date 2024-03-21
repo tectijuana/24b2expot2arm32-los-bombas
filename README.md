@@ -335,7 +335,7 @@ se realizan las operaciones indicadas en el bucle.
 
 # Saltos incondicionales y condicionales
 En este apartado se describen las instrucciones de salto disponibles
-en el ensamblador Thumb de ARM. En primer lugar se verá qué son los
+en el ensamblador ARM32. En primer lugar se verá qué son los
 saltos incondicionales y a continuación, los saltos condicionales.
 
 ## Saltos incondicionales
