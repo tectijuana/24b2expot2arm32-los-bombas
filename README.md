@@ -73,29 +73,6 @@ Quiñonez Rocha Luis Arturo
 # Marco teórico
 Instrucciones de salto condicional e incondicional, bucles y estructuras de decisión en Assembly.
 
-# Instrucciones de salto
-```
-JMP
-JA (JNBE)
-JAE (JNBE)
-JB (JNAE)
-JBE (JNA)
-JE (JZ)
-JNE (JNZ)
-JG (JNLE)
-JGE (JNL)
-JL (JNGE)
-JLE (JNG)
-JC
-JNC
-JNO
-JNP (JPO)
-JNS
-JO
-JP (JPE)
-JS
-```
-
 # Estructuras de control condicionales
 En este apartado se describen las estructuras de control condicionales
 if-then e if-then-else.
@@ -322,6 +299,29 @@ instrucción de salto incondicional es «b etiqueta», donde «etiqueta»
 referencia la línea del programa a la que se quiere saltar. Al tratarse de
 una instrucción de salto incondicional, cada vez que se ejecuta la instrucción «b etiqueta», el programa saltará a la instrucción etiquetada
 con «etiqueta», independientemente de qué valor tenga el registro CCR.
+
+# Instrucciones de salto
+```
+JMP
+JA (JNBE)
+JAE (JNBE)
+JB (JNAE)
+JBE (JNA)
+JE (JZ)
+JNE (JNZ)
+JG (JNLE)
+JGE (JNL)
+JL (JNGE)
+JLE (JNG)
+JC
+JNC
+JNO
+JNP (JPO)
+JNS
+JO
+JP (JPE)
+JS
+```
 
 #### Sintaxis
 ```
