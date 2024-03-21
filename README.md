@@ -6,7 +6,7 @@
 
 ![](https://s3.amazonaws.com/videos.pentesteracademy.com/videos/badges/low/arm-assembly.png)
 
-Borrar y modificar README
+
 
 # Utilizar los dos directorios
 
