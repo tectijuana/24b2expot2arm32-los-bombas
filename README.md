@@ -438,7 +438,52 @@ salto:
 stop: 
     b stop
 ```
-		
+
+# Bucles 
+## Estructuras de control de alto nivel
+En este punto veremos cómo se traducen a ensamblador las estructuras de control
+de alto nivel que definen un bucle (for, while, . . . ).
+
+Las estructuras for y while se pueden ejecutar un mínimo de 0 iteraciones (si
+la primera vez no se cumple la condición). La traducción de las estructuras for y
+while se puede ver en los listados 2.1 y 2.2.
+
+Para programar en ensamblador estas estructuras se utilizan instrucciones de
+salto condicional. Previo a la instrucción de salto es necesario evaluar la condición
+del bucle, mediante instrucciones aritméticas o lógicas, con el
+fin de actualizar los flags de estado.
+
+Listado 2.1: Estructura del for y while en C
+```c
+int vi , vf , i ;
+for ( i= vi ; i <= vf ; i ++ ){
+/* Cuerpo del bucle */
+}
+i= vi ;
+while ( i <= vf ){
+/* Cuerpo del bucle */
+i ++;
+}
+```
+
+Listado 2.2: Traducción de las estructuras for y while. Hemos supuesto que el valor
+inicial está en la variable vi y el valor final en la variable vf y se ha utilizado el
+registro r1 como índice de las iteraciones i.
+```asm
+ldr r1, = vi
+ldr r1, [ r1 ]
+ldr r2, = vf
+ldr r2, [ r2 ]
+bucle : cmp r1, r2
+bhi salir
+/* Cuerpo
+del
+bucle */
+add r1, r1, # 1
+b bucle
+salir :
+```
+
 <!-- Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
 programacion c++, tomados del libro "Problemas para resolver con computadora" 
 1ra edicion (1985), por el autor Donald D. Spencer. 
