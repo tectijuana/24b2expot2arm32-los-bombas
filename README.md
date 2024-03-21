@@ -74,11 +74,11 @@ Quiñonez Rocha Luis Arturo
 
 	<p align=left>
 
-Estructuras de control condicionales
+#Estructuras de control condicionales
 En este apartado se describen las estructuras de control condicionales
 if-then e if-then-else.
-		
-Estructura condicional if-then
+	
+##Estructura condicional if-then
 La estructura condicional if-then está presente en todos los lenguajes
 de programación y se usa para realizar o no un conjunto de acciones
 dependiendo de una condición. A continuación se muestra un programa
@@ -279,7 +279,7 @@ vector. En caso positivo, se salta al final del bucle y en caso negativo,
 se realizan las operaciones indicadas en el bucle.
 
 		
-Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
+<!-- Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
 programacion c++, tomados del libro "Problemas para resolver con computadora" 
 1ra edicion (1985), por el autor Donald D. Spencer. 
 
@@ -337,7 +337,7 @@ ENTREGA:
 
 	URL del GitHub Classroom, y recuerde arreglar la PORTADA, quitar todos los 
 		elementos extras del templete, acomodarlo bien para su presentación 
-		solo lo necesario.
+		solo lo necesario.-->
 
 	</p>
 
